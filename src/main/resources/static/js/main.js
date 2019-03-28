@@ -181,7 +181,50 @@ Vue.component('tableEx', {
     }
 });
 
-Vue.component()
+Vue.component('doubleClickSpeed', {
+    data: function () {
+        return {
+            timer1: 0,
+            timer2: 0,
+            res: 0,
+            counter: 0,
+            flag: true
+        }
+    },
+    template:
+    '<div>' +
+    '<table align="left" >'+
+    '<tr>'+
+    '<td>'+
+    '<input aria-label="Speed ms" type="text" placeholder="info" v-model="res" />' +
+    '</td>' +
+    '</tr>' +
+    '<tr>'+
+    '<td>'+
+    '<input aria-label="Count clicks" type="text" placeholder="counter" v-model="counter" />' +
+    '</td>' +
+    '<td>'+
+    '<button class="doubleButton" @click = "clickHere"> Click  </button>' +
+    '</td>' +
+    '</tr>' +
+    '</table>'+
+
+    '</div>',
+    methods: {
+        clickHere: function () {
+            this.counter++;
+            if (this.flag === true) {
+                this.timer1 = performance.now();
+                this.flag = false;
+            }
+            else {
+                this.timer2 = performance.now();
+                this.res = this.timer2 - this.timer1;
+                this.flag = true;
+            }
+        }
+    }
+});
 
 Vue.component('tablePerformance', {
     data: function() {
@@ -226,9 +269,12 @@ const app = new Vue({
     el: '#app',
     template:
     '<div>' +
+    '<div>' +
     '<messages-list :messages="messages" />' +
      '<table-ex />' +
     '<table-performance />' +
+    '</div>'+
+    '<double-click-speed />'+
     '</div>',
     data: {
         messages: []
