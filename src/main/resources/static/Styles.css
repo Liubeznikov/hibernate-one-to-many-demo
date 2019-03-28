@@ -1,0 +1,10 @@
+.gameButton{
+    width: 40px;
+    height: 40px;
+}
+
+.performanceButton{
+    width: 100px;
+    height: 40px;
+    background-color: burlywood;
+}
