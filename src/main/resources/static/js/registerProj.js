@@ -1,4 +1,6 @@
 
+const messageApi = Vue.resource('/users{/id}');
+
 Vue.component('registerForm', {
 
     data: function() {

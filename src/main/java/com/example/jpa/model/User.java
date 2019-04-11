@@ -6,25 +6,33 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Users")
-@ToString(of = {"login", "password"})
-@EqualsAndHashCode(of = {"id"})
+@Table(name = "UserTable")
+@ToString(of = {"login", "name", "email"})
+@EqualsAndHashCode(of = {"login"})
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     private String login;
     private String password;
+    private String name;
+    private String email;
 
-    public Long getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     public String getLogin() {
         return login;

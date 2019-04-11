@@ -1,59 +1,68 @@
 
-Vue.component('registerForm', {
+Vue.component('searchForm', {
 
     data: function() {
         return{
-            login: '',
-            name: '',
-            repeatPassword: '',
-            password: ''
+            login: ''
+
         }
     },
     template:
     '<div>'+
+    '<h3> Search Form</h3>' +
     '<p>Login </p>'  +
     '<input  type="text" placeholder="info" v-model="login" />' +
-    '<p>Name </p>'  +
-    '<input  type="text" placeholder="info" v-model="name" />' +
-    '<p>Password </p>'  +
-    '<input  type="text" placeholder="info" v-model="password" />' +
-    '<p>Repeat password</p>'  +
-    '<input  type="text" placeholder="info" v-model="repeatPassword" />' +
-    '<br> </br>' +
-    '<button @click ="loginButton"> Login </button>'+
-    '<button @click ="cancelButton"> Cancel </button>'+
 
+    '<br> </br>' +
+    '<button @click ="searchButton"> Login </button>'+
 
     '</div>',
     methods: {
-        loginButton: function () {
-            const regexp = /^[a-zA-Z0-9-_]+$/;
-            const regexpAlpha = /^[a-zA-Z]+$/;
-            if (this.login.search(regexp) === -1){
-                alert('invalid login');
-                // return 0;
-            }
 
-            if (this.name.search(regexpAlpha) === -1){
-                alert('invalid name');
-                // return 0;
-            }
-            if (this.password.length < 6 ){
-                alert('Too short password');
-                // return 0;
-            }
+        searchButton: function(){
+           alert("search");
 
-            if ( this.password !==  this.repeatPassword ){
-                alert('passwords do not match');
-                // return 0;
-            }
+        }
+    }
+});
 
 
-            alert("Login =" + this.login + "Password =" + this.password + "Name =" + this.name + "Repeat password =" + this.repeatPassword);
+Vue.component('userTable', {
 
-        },
-        cancelButton: function(){
-            window.location.href='loginPage.html';
+    data: function() {
+        return{
+            login: ['a', 'b','c'],
+            name: ['a', 'b','c']
+
+        }
+    },
+    template:
+    '<div>'+
+    '<h3> User Table</h3>' +
+    '<table align="left" >'+
+    '<tr >'+
+    '<td >'+
+    '<p> Login </p>'+
+    '</td>' +
+    '<td >'+
+    '<p> Name </p>'+
+    '</td>' +
+    '</tr>' +
+    '<tr v-for="n in 3">'+
+    '<td >'+
+    '<p @click="clickProcessor(login[n-1])"> {{login[n-1]}}</p>'+
+    '</td>' +
+    '<td >'+
+    '<p @click="clickProcessor(name[n-1])"> {{name[n-1]}}</p>'+
+    '</td>' +
+    '</tr>' +
+    '</table>'+
+
+    '</div>',
+    methods: {
+
+        clickProcessor: function(str){
+            alert(str);
 
         }
     }
@@ -63,11 +72,13 @@ Vue.component('registerForm', {
 
 
 
+
 const appUserList = new Vue({
     el: '#appUserList',
     template:
     '<div>' +
-    '<registerForm/>' +
+    '<searchForm/>' +
+    '<userTable/>' +
     '</div>',
     data: {
         messages: []
